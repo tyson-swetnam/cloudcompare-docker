@@ -1,10 +1,14 @@
 FROM ubuntu:16.04
 
-MAINTAINER Tyson Lee Swetnam <tswetnam@cyverse.org>
+# Set the locale
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+RUN export DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
-
-RUN export DEBIAN_FRONTEND=noninteractive && \
+# Install Dependencies
+RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     apt-get install -y --allow-unauthenticated \
         build-essential \
         clang \
@@ -40,9 +44,10 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install PPA for dependencies
 RUN add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
     add-apt-repository --yes ppa:beineri/opt-qt572-xenial && \
-    add-apt-repository --yes ppa:ubuntu-x-swat/updates
+    add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
     apt-get update
 
 RUN git clone https://github.com/cloudcompare/cloudcompare && \
@@ -53,5 +58,8 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     make && \
     make install
 
+WORKDIR /tmp
+
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
+MAINTAINER Tyson Lee Swetnam <tswetnam@cyverse.org>

@@ -3,6 +3,7 @@ FROM ubuntu:16.04
 RUN export DEBIAN_FRONTEND=noninteractive
 # Install PPA for dependencies
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
+    apt-get install -y build-essentials software-properties-common apt-utils \
     add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
     add-apt-repository --yes ppa:beineri/opt-qt572-xenial && \
     add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
@@ -10,7 +11,6 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
 
 # Install Dependencies
 RUN apt-get install -y --allow-unauthenticated \
-        build-essential \
         clang \
         cmake \ 
         curl \
@@ -31,7 +31,6 @@ RUN apt-get install -y --allow-unauthenticated \
         python3 \
         qt57base \
         rsync \
-        software-properties-common \
         unzip \
         zip \
         zlib1g-dev \

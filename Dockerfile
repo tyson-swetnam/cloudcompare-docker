@@ -21,7 +21,7 @@ RUN apt-get install -y --allow-unauthenticated \
         libfreetype6-dev \
         libgdal1-dev \
         libpng12-dev \
-        libqt5svg5-de \
+        libqt5svg5-dev \
         libtbb-dev \
         libzmq3-dev \
         module-init-tools \

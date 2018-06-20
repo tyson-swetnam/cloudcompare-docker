@@ -11,35 +11,34 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
 
 # Install Dependencies
 RUN apt-get install -y --allow-unauthenticated \
-        clang \
-        cmake \ 
-        curl \
-        gcc \
-        git \
-        libeigen3-dev \
-        libfreenect-dev \
-        libfreetype6-dev \
-        libgdal1-dev \
-        libpng12-dev \
-        libqt5svg5-dev \
-        libtbb-dev \
-        libzmq3-dev \
-        module-init-tools \
-        pkg-config \
-        python \
-        python-dev \
-        python3 \
-        qt57base \
-        rsync \
-        unzip \
-        zip \
-        zlib1g-dev \
-        openjdk-8-jdk \
-        openjdk-8-jre-headless \
-        vim \
-        wget \
-        libxpm-dev \
-        && \
+    clang \
+    cmake \
+    curl \
+    gcc \
+    git \
+    libeigen3-dev \
+    libfreenect-dev \
+    libfreetype6-dev \
+    libgdal1-dev \
+    libpng12-dev \
+    libqt5svg5-dev \
+    libtbb-dev \
+    libzmq3-dev \
+    module-init-tools \
+    pkg-config \
+    python \
+    python-dev \
+    python3 \
+    qt57base \
+    rsync \
+    unzip \
+    zip \
+    zlib1g-dev \
+    openjdk-8-jdk \
+    openjdk-8-jre-headless \
+    vim \
+    wget \
+    libxpm-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

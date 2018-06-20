@@ -7,14 +7,14 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN export DEBIAN_FRONTEND=noninteractive
 # Install PPA for dependencies
-RUN add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
+RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
+    add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
     add-apt-repository --yes ppa:beineri/opt-qt572-xenial && \
     add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
     apt-get update
 
 # Install Dependencies
-RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
-    apt-get install -y --allow-unauthenticated \
+RUN apt-get install -y --allow-unauthenticated \
         build-essential \
         clang \
         cmake \ 

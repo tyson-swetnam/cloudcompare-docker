@@ -6,6 +6,11 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 RUN export DEBIAN_FRONTEND=noninteractive
+# Install PPA for dependencies
+RUN add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
+    add-apt-repository --yes ppa:beineri/opt-qt572-xenial && \
+    add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
+    apt-get update
 
 # Install Dependencies
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
@@ -43,12 +48,6 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# Install PPA for dependencies
-RUN add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
-    add-apt-repository --yes ppa:beineri/opt-qt572-xenial && \
-    add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
-    apt-get update
 
 RUN git clone https://github.com/cloudcompare/cloudcompare && \
     cd cloudcompare && \

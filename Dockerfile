@@ -40,9 +40,9 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN add-apt-repository --yes ppa:george-edison55/cmake-3.x
-
-RUN add-apt-repository --yes ppa:beineri/opt-qt572-xenial && \
+RUN add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
+    add-apt-repository --yes ppa:beineri/opt-qt572-xenial && \
+    add-apt-repository --yes ppa:ubuntu-x-swat/updates
     apt-get update
 
 RUN git clone https://github.com/cloudcompare/cloudcompare && \

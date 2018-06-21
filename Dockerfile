@@ -41,7 +41,7 @@ RUN apt-get install -y --allow-unauthenticated \
     libxpm-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-RUN apt-get install -y libglu1-mesa-dev freeglut3-dev mesa-common-dev
+RUN apt-get update && apt-get install -y libglu1-mesa-dev freeglut3-dev mesa-common-dev mesa-utils
 RUN git clone https://github.com/cloudcompare/cloudcompare && \
     cd cloudcompare && \
     mkdir build && \

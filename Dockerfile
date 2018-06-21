@@ -6,7 +6,7 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     apt-get install -y build-essential software-properties-common apt-utils && \
     add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
     add-apt-repository --yes ppa:beineri/opt-qt571-xenial && \
-    # add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
+    add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
     apt-get update
 
 # Install Dependencies

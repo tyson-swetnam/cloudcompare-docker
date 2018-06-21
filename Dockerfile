@@ -71,7 +71,7 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     -DINSTALL_QPHOTOSCAN_IO_PLUGIN=ON \
     -DINSTALL_QPOISSON_RECON_PLUGIN=ON \
     -DINSTALL_QSRA_PLUGIN=ON \
-    -DINSTALL_QSSAO_PLUGIN=ON && \
+    -DINSTALL_QSSAO_PLUGIN=ON .. && \
     make && \
     make install
 

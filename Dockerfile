@@ -11,6 +11,7 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
 
 # Install Dependencies
 RUN apt-get install -y --allow-unauthenticated \
+    blender \
     clang \
     cmake \
     curl \
@@ -24,6 +25,7 @@ RUN apt-get install -y --allow-unauthenticated \
     libqt5svg5-dev \
     libtbb-dev \
     libzmq3-dev \
+    meshlab \
     module-init-tools \
     pkg-config \
     python \

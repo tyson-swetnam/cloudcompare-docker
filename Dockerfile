@@ -59,8 +59,16 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
     apt-get install libgdal1i libgdal1-dev && \
     apt-get upgrade && \
     apt-get install -y gdal-bin python-gdal python3-gdal
-#LIBLAS
-RUN apt-get install -y liblas-dev liblas-bin 
+#LIBLAS & Boost
+RUN apt-get install -y liblas-dev liblas-bin \
+    libboost-all-dev
+#LASZIP
+RUN git clone https://github.com/LASzip/LASzip.git && \
+    git tag && \ #List tags 
+    git checkout tags/3.2.2 && \
+    ./configure && \
+    make && \
+    make install
 
 # Install CloudCompare Trunk from Github
 RUN git clone https://github.com/cloudcompare/cloudcompare && \
@@ -70,7 +78,7 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release \ 
-    -DQT5_ROOT_PATH=/opt/qt57 \
+    -DQT5_ROOT_PATH=/opt/qt511 \
     -DEIGEN_ROOT_DIR=/usr/include/eigen3 \
     -DCOMPILE_CC_CORE_LIB_WITH_TBB=ON \
     -DOPTION_USE_DXF_LIB=ON \
@@ -95,6 +103,8 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     -DINSTALL_QSSAO_PLUGIN=ON \
     # Plugins
     -DOPTION_USE_GDAL=ON \
+    -DLIBLAS_INCLUDE_DIR=/usr/local/lib \
+    -DLIBLAS_RELEASE_LIBRARY_FILE=
     -DOPTION_USE_LIBLAS=ON \
     .. && \
     make && \

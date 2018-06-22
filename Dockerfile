@@ -104,7 +104,7 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
 #    apt-get update && \
 #    apt-get install -y blender meshlab
 
-WORKDIR $PWD
+WORKDIR /tmp
 
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt

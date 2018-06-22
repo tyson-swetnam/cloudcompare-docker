@@ -1,4 +1,5 @@
 FROM nvidia/opengl:1.0-glvnd-devel-ubuntu16.04
+# NVIDIA Drivers for Linux 
 
 RUN export DEBIAN_FRONTEND=noninteractive
 
@@ -7,15 +8,14 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     apt-get install -y --allow-unauthenticated build-essential software-properties-common apt-utils && \
     add-apt-repository --yes ppa:webupd8team/y-ppa-manager && \
     apt-get update && \
-    apt=get install -y y-ppa-manager && \
+    apt-get install -y y-ppa-manager && \
     add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
     add-apt-repository --yes ppa:beineri/opt-qt-5.11.0-xenial && \
-    # add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
+    add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
     apt-get update
 
-# Install Dependencies
+# Install various dependencies
 RUN apt-get install -y --allow-unauthenticated \
-    blender \
     clang \
     cmake \
     curl \
@@ -29,7 +29,6 @@ RUN apt-get install -y --allow-unauthenticated \
     libqt5svg5-dev \
     libtbb-dev \
     libzmq3-dev \
-    meshlab \
     module-init-tools \
     pkg-config \
     python \
@@ -48,7 +47,22 @@ RUN apt-get install -y --allow-unauthenticated \
     libxpm-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-# RUN apt-get update && apt-get install -y libglu1-mesa-dev freeglut3-dev mesa-common-dev mesa-utils
+
+# Install OpenGL Drivers
+RUN apt-get update && \
+    apt-get install -y libglu1-mesa-dev freeglut3-dev mesa-common-dev mesa-utils
+
+# Install various CloudCompare Plug-in dependencies
+# GDAL
+RUN add-apt-repository -y ppa:ubuntugis/ppa && \
+    apt-get update && \ 
+    apt-get install libgdal1i libgdal1-dev && \
+    apt-get upgrade && \
+    apt-get install -y gdal-bin python-gdal python3-gdal
+#LIBLAS
+RUN apt-get install -y liblas-dev liblas-bin 
+
+# Install CloudCompare Trunk from Github
 RUN git clone https://github.com/cloudcompare/cloudcompare && \
     cd cloudcompare && \
     git submodule init && \
@@ -78,11 +92,19 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     -DINSTALL_QPHOTOSCAN_IO_PLUGIN=ON \
     -DINSTALL_QPOISSON_RECON_PLUGIN=ON \
     -DINSTALL_QSRA_PLUGIN=ON \
-    -DINSTALL_QSSAO_PLUGIN=ON .. && \
+    -DINSTALL_QSSAO_PLUGIN=ON \
+    # Plugins
+    -DOPTION_USE_GDAL=ON \
+    -DOPTION_USE_LIBLAS=ON \
+    .. && \
     make && \
     make install
 
-WORKDIR /tmp
+# Install Blender and Meshlab
+#    apt-get update && \
+#    apt-get install -y blender meshlab
+
+WORKDIR $PWD
 
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt

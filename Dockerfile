@@ -1,9 +1,13 @@
-FROM ubuntu:16.04
+FROM nvidia/opengl:1.0-glvnd-devel-ubuntu16.04
 
 RUN export DEBIAN_FRONTEND=noninteractive
+
 # Install PPA for dependencies
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     apt-get install -y --allow-unauthenticated build-essential software-properties-common apt-utils && \
+    add-apt-repository --yes ppa:webupd8team/y-ppa-manager && \
+    apt-get update && \
+    apt=get install -y y-ppa-manager && \
     add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
     add-apt-repository --yes ppa:beineri/opt-qt-5.11.0-xenial && \
     add-apt-repository --yes ppa:ubuntu-x-swat/updates && \

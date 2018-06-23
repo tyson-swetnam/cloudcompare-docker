@@ -78,7 +78,7 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release \ 
-    -DQT5_ROOT_PATH=/opt/qt511 \
+    -DQT5_ROOT_PATH=/opt/qt57 \
     -DEIGEN_ROOT_DIR=/usr/include/eigen3 \
     -DCOMPILE_CC_CORE_LIB_WITH_TBB=ON \
     -DOPTION_USE_DXF_LIB=ON \

@@ -10,7 +10,7 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     apt-get update && \
     apt-get install -y y-ppa-manager && \
     add-apt-repository --yes ppa:george-edison55/cmake-3.x && \
-    add-apt-repository --yes ppa:beineri/opt-qt-5.11.0-xenial && \
+    add-apt-repository --yes ppa:beineri/opt-qt571-xenial && \
     add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
     apt-get update
 
@@ -35,7 +35,7 @@ RUN apt-get install -y --allow-unauthenticated \
     python-dev \
     python3 \
     qt5-default \
-    qt511base \
+    qt57base \
     rsync \
     unzip \
     zip \

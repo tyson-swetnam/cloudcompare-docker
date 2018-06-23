@@ -1,5 +1,5 @@
+# NVIDIA OpenGL drivers for Linux 
 FROM nvidia/opengl:1.0-glvnd-devel-ubuntu16.04
-# NVIDIA Drivers for Linux 
 
 RUN export DEBIAN_FRONTEND=noninteractive
 
@@ -64,7 +64,7 @@ RUN apt-get install -y liblas-dev liblas-bin \
     libboost-all-dev
 #LASZIP
 RUN git clone https://github.com/LASzip/LASzip.git && \
-    git tag && \ #List tags 
+    git tag && \ 
     git checkout tags/3.2.2 && \
     ./configure && \
     make && \
@@ -103,9 +103,9 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     -DINSTALL_QSSAO_PLUGIN=ON \
     # Plugins
     -DOPTION_USE_GDAL=ON \
-    -DLIBLAS_INCLUDE_DIR=/usr/local/lib \
-    -DLIBLAS_RELEASE_LIBRARY_FILE=
-    -DOPTION_USE_LIBLAS=ON \
+    #-DLIBLAS_INCLUDE_DIR=/usr/local/lib \
+    #-DLIBLAS_RELEASE_LIBRARY_FILE=
+    #-DOPTION_USE_LIBLAS=ON \
     .. && \
     make && \
     make install

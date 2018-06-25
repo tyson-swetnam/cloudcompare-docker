@@ -162,7 +162,7 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     make && \
     make install
 
-RUN export LD_LIBRARY_PATH=/opt/qt57/lib/
+ENV export LD_LIBRARY_PATH=/opt/qt57/lib/
 
 # Install Blender and Meshlab
 #    apt-get update && \

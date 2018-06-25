@@ -44,7 +44,7 @@ RUN apt-get install -y --allow-unauthenticated \
     python \
     python-dev \
     python3 \
-    qt5-default \
+    # qt5-default \
     qt57base \
     rsync \
     unzip \
@@ -59,6 +59,7 @@ RUN apt-get install -y --allow-unauthenticated \
     rm -rf /var/lib/apt/lists/*
 
 run ln -s /usr/lib/x86_64-linux-gnu/libvtkCommonCore-6.2.so /usr/lib/libvtkproj4.so
+
 # Install OpenGL Drivers
 RUN apt-get update && \
     apt-get install -y libglu1-mesa-dev freeglut3-dev mesa-common-dev mesa-utils
@@ -160,6 +161,8 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     .. && \
     make && \
     make install
+
+RUN export LD_LIBRARY_PATH=/opt/qt57/lib/
 
 # Install Blender and Meshlab
 #    apt-get update && \

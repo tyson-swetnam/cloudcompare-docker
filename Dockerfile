@@ -58,7 +58,7 @@ RUN apt-get install -y --allow-unauthenticated \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-run ln -s /usr/lib/x86_64-linux-gnu/libvtkCommonCore-6.2.so /usr/lib/libvtkproj4.so
+RUN ln -s /usr/lib/x86_64-linux-gnu/libvtkCommonCore-6.2.so /usr/lib/libvtkproj4.so
 
 # Install OpenGL Drivers
 RUN apt-get update && \

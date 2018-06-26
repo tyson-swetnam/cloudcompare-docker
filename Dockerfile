@@ -168,8 +168,8 @@ ENV LD_LIBRARY_PATH /opt/qt57/lib/
 ENV DISPLAY $DISPLAY
 VOLUME /tmp/.X11-unix
 
-RUN export uid=1000 gid=129 && \
-    mkdir -p /home/developer && \
+# export uid=1000 gid=129 && \
+RUN mkdir -p /home/developer && \
     echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
     echo "developer:x:${uid}:" >> /etc/group && \
     echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \

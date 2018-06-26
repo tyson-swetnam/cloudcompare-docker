@@ -93,7 +93,7 @@ RUN wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/eigen3/3.3.4
     .. && \
     make && \
     make install
-
+    rm eigen3_3.3.4.orig.tar.bz2
 #PDAL
 RUN wget https://github.com/PDAL/PDAL/releases/download/1.7.2/PDAL-1.7.2-src.tar.gz && \
     tar xvzf PDAL-1.7.2-src.tar.gz && \
@@ -108,6 +108,7 @@ RUN wget https://github.com/PDAL/PDAL/releases/download/1.7.2/PDAL-1.7.2-src.tar
     .. && \
     make && \
     make install
+    rm PDAL-1.7.2-src.tar.gz
 
 # PCL
 #RUN add-apt-repository --yes ppa:v-launchpad-jochen-sprickerhof-de/pcl && \
@@ -163,8 +164,19 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     make install
 
 ENV LD_LIBRARY_PATH /opt/qt57/lib/
+ENV DISPLAY $DISPLAY
 VOLUME /tmp/.X11-unix
-WORKDIR /tmp
+
+RUN export uid=1000 gid=129 && \
+    mkdir -p /home/developer && \
+    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
+    echo "developer:x:${uid}:" >> /etc/group && \
+    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
+    chmod 0440 /etc/sudoers.d/developer && \
+    chown ${uid}:${gid} -R /home/developer
+
+USER developer
+ENV HOME /home/developer
 
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt

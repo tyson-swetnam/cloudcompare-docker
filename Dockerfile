@@ -92,8 +92,8 @@ RUN wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/eigen3/3.3.4
     cmake -DCMAKE_BUILD_TYPE=Release \
     .. && \
     make && \
-    make install && \
-    rm eigen3_3.3.4.orig.tar.bz2
+    make install 
+    #rm eigen3_3.3.4.orig.tar.bz2
     
 #PDAL
 RUN wget https://github.com/PDAL/PDAL/releases/download/1.7.2/PDAL-1.7.2-src.tar.gz && \
@@ -108,8 +108,8 @@ RUN wget https://github.com/PDAL/PDAL/releases/download/1.7.2/PDAL-1.7.2-src.tar
     -DBUILD_PLUGIN_PGPOINTCLOUD=OFF \
     .. && \
     make && \
-    make install && \
-    rm PDAL-1.7.2-src.tar.gz
+    make install
+    #rm PDAL-1.7.2-src.tar.gz
 
 # PCL
 #RUN add-apt-repository --yes ppa:v-launchpad-jochen-sprickerhof-de/pcl && \

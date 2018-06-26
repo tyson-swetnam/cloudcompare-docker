@@ -22,8 +22,12 @@ docker build -t tswetnam/cloudcompare:latest .
 
 To run the container with OpenGL on Intel graphics (e.g. Atmosphere Virtual Machines, Intel NUCs):
 
+NOT SECURE
+
 ```
-docker run -ti --rm -e "DISPLAY=$DISPLAY" -v="/tmp/.X11-unix:/tmp/.X11-unix:rw" --privileged tswetnam/cloudcompare CloudCompare
+xhost +local:root
+docker run -ti --rm -e "DISPLAY=unix$DISPLAY" -v="/tmp/.X11-unix:/tmp/.X11-unix:rw" -v /home/tyson_swetnam/:/temp --privileged tswetnam/cloudcompare-docker:0.1 CloudCompare
+
 ```
 
 ## Mac OS X

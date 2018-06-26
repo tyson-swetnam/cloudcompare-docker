@@ -165,19 +165,9 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     make install
 
 ENV LD_LIBRARY_PATH /opt/qt57/lib/
+
 ENV DISPLAY $DISPLAY
 VOLUME /tmp/.X11-unix
-
-# export uid=1000 gid=129 && \
-RUN mkdir -p /home/developer && \
-    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
-    echo "developer:x:${uid}:" >> /etc/group && \
-    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
-    chmod 0440 /etc/sudoers.d/developer && \
-    chown ${uid}:${gid} -R /home/developer
-
-USER developer
-ENV HOME /home/developer
 
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt

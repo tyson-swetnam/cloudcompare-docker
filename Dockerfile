@@ -163,15 +163,7 @@ RUN git clone https://github.com/cloudcompare/cloudcompare && \
     make install
 
 ENV LD_LIBRARY_PATH /opt/qt57/lib/
-ENV DISPLAY unix$DISPLAY
-
 VOLUME /tmp/.X11-unix
-
-
-# Install Blender and Meshlab
-#    apt-get update && \
-#    apt-get install -y blender meshlab
-
 WORKDIR /tmp
 
 # build info

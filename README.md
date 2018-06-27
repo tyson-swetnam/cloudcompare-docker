@@ -58,7 +58,7 @@ ocelote -X
 Start a GPU node
 
 ```
-qsub -X -I -N cloudcompare -m bea -W group_list=tswetnam -q windfall -l select=1:ncpus=28:mem=168gb:ngpus=1 -l cput=1:0:0 -l walltime=1:0:0
+qsub -X -I -N cloudcompare -m bea -W group_list=$GROUP -q windfall -l select=1:ncpus=28:mem=168gb:ngpus=1 -l cput=1:0:0 -l walltime=1:0:0
 ```
 
 Load Cuda and Singularity

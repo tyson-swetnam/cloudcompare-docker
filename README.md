@@ -68,6 +68,14 @@ module load cuda80/gtk
 module load singularity
 ```
 
+Run the container and start CloudCompare
+
+```
+singularity exec --bind /xdisk/$USER docker://tswetnam/cloudcompare-docker:latest CloudCompare
+```
+
+If you get an error, you may need to reset the DISPLAY.
+
 Find out what the local display is:
 
 ```
@@ -77,10 +85,10 @@ echo $DISPLAY
 Run Docker container as shell
 
 ```
-singularity shell --bind /xdisk/$USER docker://tswetnam/cloudcompare-docker:0.1 
+singularity shell --bind /xdisk/$USER docker://tswetnam/cloudcompare-docker:latest
 ```
 
-From within the shell, reset the DISPLAY
+From the Singularity shell:
 
 ```
 export DISPLAY=localhost:50.0

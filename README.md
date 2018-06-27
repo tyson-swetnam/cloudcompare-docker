@@ -18,6 +18,10 @@ cd cloudcompare-docker
 docker build -t tswetnam/cloudcompare:latest .
 ```
 
+## Windows
+
+TBD
+
 ## Linux
 
 To run a [Docker GUI container](http://wiki.ros.org/docker/Tutorials/GUI#The_simple_way) with OpenGL on Intel graphics (e.g. Atmosphere Virtual Machines, Intel NUCs):
@@ -28,6 +32,8 @@ To run a [Docker GUI container](http://wiki.ros.org/docker/Tutorials/GUI#The_sim
 xhost +local:root
 docker run -ti --rm -e "DISPLAY=unix$DISPLAY" -v="/tmp/.X11-unix:/tmp/.X11-unix:rw" -v /home/$USER/:/temp --privileged tswetnam/cloudcompare-docker:0.1 CloudCompare
 ```
+
+This method is okay on CyVerse Atmosphere, where you're running in your own Web Desktop environment. 
 
 ## Mac OS X
 

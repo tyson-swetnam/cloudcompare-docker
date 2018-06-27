@@ -40,3 +40,54 @@ You can run the Docker container with Singularity (for HPC use).
 ```
 singularity exec docker://tswetnam/cloudcompare-docker:latest CloudCompare
 ```
+
+# University of Arizona HPC
+
+Log into the HPC
+
+```
+ssh -X $USER@hpc.arizona.edu
+```
+
+Select a system from the Bastion
+
+```
+ocelote -X
+```
+
+Start a GPU node
+
+```
+qsub -X -I -N cloudcompare -m bea -W group_list=tswetnam -q windfall -l select=1:ncpus=28:mem=168gb:ngpus=1 -l cput=1:0:0 -l walltime=1:0:0
+```
+
+Load Cuda and Singularity
+
+```
+module load cuda80/gtk
+module load singularity
+```
+
+Find out what the local display is:
+
+```
+echo $DISPLAY
+```
+
+Run Docker container as shell
+
+```
+singularity shell --bind /xdisk/$USER docker://tswetnam/cloudcompare-docker:0.1 
+```
+
+From within the shell, reset the DISPLAY
+
+```
+export DISPLAY=localhost:50.0
+```
+
+Start CloudCompare
+
+```
+CloudCompare
+```

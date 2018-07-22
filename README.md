@@ -1,10 +1,12 @@
 # cloudcompare-docker
 
-Docker build for cloudcompare in linux xenial
+Docker build for [CloudCompare](https://www.danielgm.net/cc/) Ubuntu Xenial.
+
+[CloudCompare Github](https://github.com/cloudcompare/cloudcompare)
 
 ## Instructions
 
-Pull this container from DockerHub:
+Pull the latest container from Docker-Hub:
 
 ```
 docker pull tswetnam/cloudcompare-docker:latest

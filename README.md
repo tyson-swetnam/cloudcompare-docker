@@ -1,4 +1,4 @@
-# cloudcompare-docker
+# CloudCompare
 
 Docker build for [CloudCompare](https://www.danielgm.net/cc/) Ubuntu Xenial.
 

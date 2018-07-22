@@ -9,7 +9,7 @@ Docker build for [CloudCompare](https://www.danielgm.net/cc/) Ubuntu Xenial.
 Pull the latest container from Docker-Hub:
 
 ```
-docker pull tswetnam/cloudcompare-docker:latest
+docker pull tswetnam/cloudcompare:latest
 ```
 
 Build the container yourself:
@@ -32,7 +32,7 @@ To run a [Docker GUI container](http://wiki.ros.org/docker/Tutorials/GUI#The_sim
 
 ```
 xhost +local:root
-docker run -ti --rm -e "DISPLAY=unix$DISPLAY" -v="/tmp/.X11-unix:/tmp/.X11-unix:rw" -v /home/$USER/:/temp --privileged tswetnam/cloudcompare-docker:0.1 CloudCompare
+docker run -ti --rm -e "DISPLAY=unix$DISPLAY" -v="/tmp/.X11-unix:/tmp/.X11-unix:rw" -v /home/$USER/:/temp --privileged tswetnam/cloudcompare:0.1 CloudCompare
 ```
 
 This method is okay on CyVerse Atmosphere, where you're running in your own Web Desktop environment. 
@@ -46,7 +46,7 @@ https://cntnr.io/running-guis-with-docker-on-mac-os-x-a14df6a76efc
 You can run the Docker container with Singularity (for HPC use).
 
 ```
-singularity exec docker://tswetnam/cloudcompare-docker:latest CloudCompare
+singularity exec docker://tswetnam/cloudcompare:latest CloudCompare
 ```
 
 # University of Arizona HPC
@@ -79,7 +79,7 @@ module load singularity
 Run the container and start CloudCompare
 
 ```
-singularity exec --bind /xdisk/$USER docker://tswetnam/cloudcompare-docker:latest CloudCompare
+singularity exec --bind /xdisk/$USER docker://tswetnam/cloudcompare:latest CloudCompare
 ```
 
 If you get an error, you may need to reset the DISPLAY.
@@ -93,7 +93,7 @@ echo $DISPLAY
 Run Docker container as shell
 
 ```
-singularity shell --bind /xdisk/$USER docker://tswetnam/cloudcompare-docker:latest
+singularity shell --bind /xdisk/$USER docker://tswetnam/cloudcompare:latest
 ```
 
 From the Singularity shell:

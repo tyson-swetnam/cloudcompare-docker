@@ -32,7 +32,7 @@ To run a [Docker GUI container](http://wiki.ros.org/docker/Tutorials/GUI#The_sim
 
 ```
 xhost +local:root
-docker run -ti --rm -e "DISPLAY=unix$DISPLAY" -v="/tmp/.X11-unix:/tmp/.X11-unix:rw" -v /home/$USER/:/temp --privileged tswetnam/cloudcompare:0.1 CloudCompare
+docker run -ti --rm -e "DISPLAY=unix$DISPLAY" -v="/tmp/.X11-unix:/tmp/.X11-unix:rw" -v /home/$USER/:/temp --privileged tswetnam/cloudcompare:latest CloudCompare
 ```
 
 This method is okay on CyVerse Atmosphere, where you're running in your own Web Desktop environment. 

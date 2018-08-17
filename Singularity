@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: tswetnam/cloudcompare-docker
+From: tswetnam/cloudcompare
 
 %help
   Run CloudCompare: $ CloudCompare

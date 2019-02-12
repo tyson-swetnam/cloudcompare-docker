@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM nvidia/opengl:1.1-glvnd-devel-ubuntu16.04
 
 RUN export DEBIAN_FRONTEND=noninteractive
 

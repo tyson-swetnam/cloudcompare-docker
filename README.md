@@ -1,6 +1,6 @@
 # CloudCompare
 
-Docker build for [CloudCompare](https://www.danielgm.net/cc/) Ubuntu Xenial.
+Docker build for [CloudCompare](https://www.danielgm.net/cc/) based on [NVIDIA OpenGL Ubuntu](https://hub.docker.com/r/nvidia/opengl) containers.
 
 [CloudCompare Github](https://github.com/cloudcompare/cloudcompare)
 

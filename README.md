@@ -4,6 +4,11 @@ Docker build for [CloudCompare](https://www.danielgm.net/cc/) Ubuntu Xenial.
 
 [CloudCompare Github](https://github.com/cloudcompare/cloudcompare)
 
+image            | description                               | size   | metrics | build status 
+---------------- | ----------------------------------------- | ------ | ------- | --------------
+[CloudCompare](https://hub.docker.com/r/tswetnam/cloudcompare) | CloudCompare w/ NVIDIA OpenGL Ubuntu 18.04 base | [![](https://images.microbadger.com/badges/image/tswetnam/cloudcompare.svg)](https://microbadger.com/images/tswetnam/cloudcompare) | [![](https://img.shields.io/docker/pulls/tswetnam/cloudcompare.svg)](https://hub.docker.com/r/tswetnam/cloudcompare)  |  [![](https://img.shields.io/docker/automated/tswetnam/cloudcompare.svg)](https://hub.docker.com/r/tswetnam/cloudcompare/builds)
+
+
 ## Instructions
 
 Pull the latest container from Docker-Hub:

@@ -1,4 +1,7 @@
-FROM nvidia/opengl:1.1-glvnd-devel-ubuntu16.04
+FROM tswetnam/xpra:bionic
+
+RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
+MAINTAINER Tyson Lee Swetnam <tswetnam@cyverse.org>
 
 RUN export DEBIAN_FRONTEND=noninteractive
 
@@ -95,9 +98,9 @@ RUN wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/eigen3/3.3.4
     make install
     
 #PDAL
-RUN wget https://github.com/PDAL/PDAL/releases/download/1.7.2/PDAL-1.7.2-src.tar.gz && \
-    tar xvzf PDAL-1.7.2-src.tar.gz && \
-    cd PDAL-1.7.2-src && \
+RUN wget https://github.com/PDAL/PDAL/releases/download/2.0.1/PDAL-2.0.1-src.tar.gz && \
+    tar xvzf PDAL-2.0.1-src.tar.gz && \
+    cd PDAL-2.0.1-src && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release \
@@ -167,7 +170,3 @@ RUN cd && rm -rf eigen3_3.3.4.orig.tar.bz2 && \
 ENV LD_LIBRARY_PATH /opt/qt57/lib/
 
 VOLUME /tmp/.X11-unix
-
-# build info
-RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
-MAINTAINER Tyson Lee Swetnam <tswetnam@cyverse.org>

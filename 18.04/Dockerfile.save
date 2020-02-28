@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     add-apt-repository --yes ppa:webupd8team/y-ppa-manager && \
     apt-get update && \
     apt-get install -y y-ppa-manager && \
-    add-apt-repository --yes ppa:beineri/opt-qt-5.11.3-bionic && \
+    #add-apt-repository --yes ppa:beineri/opt-qt-5.11.3-bionic && \
     add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
     apt-get update
 
@@ -23,7 +23,6 @@ RUN apt-get install -y --allow-unauthenticated \
     ffmpeg \
     gcc \
     git \
-    htop \
     libavcodec-dev \
     libavformat-dev \
     libavutil-dev \
@@ -48,7 +47,6 @@ RUN apt-get install -y --allow-unauthenticated \
     python-dev \
     python3 \
     qt5-default \
-    qt511base \
     qttools5-dev \
     rsync \
     unzip \
@@ -57,7 +55,6 @@ RUN apt-get install -y --allow-unauthenticated \
     openjdk-8-jdk \
     openjdk-8-jre-headless \
     vim \
-    nano \
     wget \
     libxpm-dev && \
     apt-get clean && \
@@ -75,7 +72,7 @@ RUN add-apt-repository --yes ppa:ubuntugis/ppa && \
     apt-get install -y gdal-bin python-gdal python3-gdal libgeotiff-dev libjsoncpp-dev python-numpy
 
 #LASZIP
-RUN cd /opt && git clone https://github.com/LASzip/LASzip && \
+RUN git clone https://github.com/LASzip/LASzip && \
     cd LASzip && \
     git tag && \ 
     git checkout tags/3.4.3 && \
@@ -87,17 +84,18 @@ RUN cd /opt && git clone https://github.com/LASzip/LASzip && \
     make install
 
 # EIGEN
-RUN cd /opt && wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2 && \
+RUN wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2 && \
     tar xvjf eigen* && \
     cd eigen-* && \
     mkdir build && \
     cd build && \
-    cmake .. && \
+    cmake -DCMAKE_BUILD_TYPE=Release \
+    .. && \
     make && \
     make install
     
 #PDAL
-RUN cd /opt && wget https://github.com/PDAL/PDAL/releases/download/2.0.1/PDAL-2.0.1-src.tar.gz && \
+RUN wget https://github.com/PDAL/PDAL/releases/download/2.0.1/PDAL-2.0.1-src.tar.gz && \
     tar xvzf PDAL-2.0.1-src.tar.gz && \
     cd PDAL-2.0.1-src && \
     mkdir build && \
@@ -113,23 +111,21 @@ RUN cd /opt && wget https://github.com/PDAL/PDAL/releases/download/2.0.1/PDAL-2.
 
 # PCL
 #RUN add-apt-repository --yes ppa:v-launchpad-jochen-sprickerhof-de/pcl && \
-#    apt-get update && \
-#    apt-get install -y libpcl-all libpcl-dev
+#    apt-get update && \#    apt-get install -y libpcl-all libpcl-dev
 
-# CC compiling suggestion
-RUN /sbin/ldconfig -v
+RUN /sbin/ldconfig
 
 # Install CloudCompare Trunk from Github
-ENV LD_LIBRARY_PATH /opt/qt511/lib/
-RUN cd /opt && git clone --recursive https://github.com/cloudcompare/CloudCompare.git  
-RUN cd /opt/CloudCompare && git checkout tags/v2.10.1 && git submodule init && \
+RUN ls -lah /opt
+RUN git clone https://github.com/cloudcompare/cloudcompare  
+RUN apt-get update && apt-get install -y qtcreator
+RUN cd cloudcompare && git submodule init && \
     git submodule update && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release \
-    -DOPTION_MP_BUILD=ON \
-    -DQT5_ROOT_PATH=/opt/qt511/ \	    
-    -DEIGEN_ROOT_DIR=/usr/local/include/eigen3/ \
+    -DQT5_ROOT_PATH=/opt/qt5 \
+    -DEIGEN_ROOT_DIR=/usr/include/eigen3 \
     -DCOMPILE_CC_CORE_LIB_WITH_TBB=ON \
     -DCOMPILE_CC_CORE_LIB_WITH_CGAL=ON \
     -DINSTALL_EXAMPLE_PLUGIN=ON \
@@ -165,9 +161,11 @@ RUN cd /opt/CloudCompare && git checkout tags/v2.10.1 && git submodule init && \
     make && \
     make install
 
-RUN cd /opt && rm -rf *.tar.bz2 && \
+USER user
+
+RUN cd && rm -rf *.tar.bz2 && \
     rm -rf *.tar.gz
 
-USER user
+ENV LD_LIBRARY_PATH /opt/qt5/lib/
 
 VOLUME /tmp/.X11-unix

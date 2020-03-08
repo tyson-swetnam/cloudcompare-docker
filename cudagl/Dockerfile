@@ -1,4 +1,4 @@
-FROM tswetnam/xpra:bionic
+FROM tswetnam/xpra:cudagl-18.04
 
 MAINTAINER Tyson Lee Swetnam <tswetnam@cyverse.org>
 
@@ -127,7 +127,6 @@ RUN cd /opt/CloudCompare && git checkout tags/v2.10.1 && git submodule init && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release \
-    -DOPTION_MP_BUILD=ON \
     -DQT5_ROOT_PATH=/opt/qt511/ \	    
     -DEIGEN_ROOT_DIR=/usr/local/include/eigen3/ \
     -DCOMPILE_CC_CORE_LIB_WITH_TBB=ON \
@@ -170,10 +169,9 @@ RUN cd /tmp && wget https://sourceforge.net/projects/virtualgl/files/2.6.3/virtu
 RUN cd /opt && rm -rf *.tar.bz2 && \
     rm -rf *.tar.gz && rm -rf *.deb
 
-WORKDIR /home/user/
-
 USER user
 
-CMD xpra start --bind-tcp=0.0.0.0:9876 --html=on --start-child=CloudCompare --exit-with-children=no --daemon=no --xvfb="/usr/bin/Xvfb +extension Composite -screen 0 1920x1080x24+32 -nolisten tcp -noreset" --pulseaudio=no --notifications=no --bell=no :100  --video-encoders=nvenc
+VOLUME /tmp/.X11-unix
 
+CMD xpra start :10 --video-encoders=nvenc --bind-tcp=0.0.0.0:9876 --html=on --start-child=CloudCompare --exit-with-children=no --daemon=no --xvfb="/usr/bin/Xvfb +extension Composite -screen 0 1920x1080x24+32 -nolisten tcp -noreset" --pulseaudio=no --notifications=no --bell=no 
 

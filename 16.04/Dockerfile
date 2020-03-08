@@ -1,4 +1,6 @@
-FROM nvidia/opengl:1.1-glvnd-devel-ubuntu16.04
+FROM tswetnam/xpra_desktop:16.04
+
+USER root
 
 RUN export DEBIAN_FRONTEND=noninteractive
 
@@ -117,6 +119,7 @@ RUN wget https://github.com/PDAL/PDAL/releases/download/1.7.2/PDAL-1.7.2-src.tar
 RUN /sbin/ldconfig
 
 # Install CloudCompare Trunk from Github
+RUN apt-get install -y qttools5-dev-tools
 RUN git clone https://github.com/cloudcompare/cloudcompare && \
     cd cloudcompare && \
     git submodule init && \
@@ -171,3 +174,13 @@ VOLUME /tmp/.X11-unix
 # build info
 RUN echo "Timestamp:" `date --utc` | tee /image-build-info.txt
 MAINTAINER Tyson Lee Swetnam <tswetnam@cyverse.org>
+
+USER user
+
+ENV DISPLAY=:100
+
+WORKDIR /home/user
+
+EXPOSE 9876
+
+CMD xpra start --bind-tcp=0.0.0.0:9876 --html=on --start-child=xterm --exit-with-children=no --daemon=no --xvfb="/usr/bin/Xvfb +extension Composite -screen 0 1920x1080x24+32 -nolisten tcp -noreset" --pulseaudio=no --notifications=no --bell=no :100

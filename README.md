@@ -73,7 +73,7 @@ module load singularity
 Run the container and start CloudCompare
 
 ```
-singularity exec --bind /xdisk/$USER docker://tswetnam/cloudcompare:latest CloudCompare
+singularity exec --nv --bind /xdisk/$USER docker://tswetnam/xpra-cc:cudagl-18.04 vglrun CloudCompare
 ```
 
 If you get an error, you may need to reset the DISPLAY.

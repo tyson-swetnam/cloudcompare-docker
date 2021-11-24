@@ -1,4 +1,4 @@
-FROM harbor.cyverse.org/xpra/ubuntu:qgis-20.04
+FROM harbor.cyverse.org/vice/xpra/desktop:geospatial-20.04
 
 USER root
 

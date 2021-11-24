@@ -12,17 +12,18 @@ RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     apt-get update && \
     apt-get install -y y-ppa-manager && \
     add-apt-repository --yes ppa:beineri/opt-qt-5.11.3-bionic && \
-    add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
-    apt-get update
+    add-apt-repository --yes ppa:ubuntu-x-swat/updates 
 
 # Install various dependencies
-RUN apt-get install -y --allow-unauthenticated \
+RUN apt-get update && apt-get install -y --allow-unauthenticated \
     clang \
     cmake \
     curl \
     ffmpeg \
+    freeglut3-dev \
     gcc \
     git \
+    glmark2 \
     htop \
     libavcodec-dev \
     libavformat-dev \
@@ -34,6 +35,8 @@ RUN apt-get install -y --allow-unauthenticated \
     libfreenect-dev \
     libfreetype6-dev \
     libgdal-dev \
+    libglu1-mesa-dev \
+    libpcl-dev \
     libpng-dev \
     libproj-dev \
     libqt5svg5-dev \
@@ -42,11 +45,12 @@ RUN apt-get install -y --allow-unauthenticated \
     libtbb-dev \
     libxerces-c-dev \
     libzmq3-dev \
+    mesa-common-dev \
+    mesa-utils \
     module-init-tools \
     pkg-config \
-    python \
-    python-dev \
     python3 \
+    qt511-meta-minimal \
     qt5-default \
     qt511base \
     qttools5-dev \
@@ -64,10 +68,6 @@ RUN apt-get install -y --allow-unauthenticated \
     rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /usr/lib/x86_64-linux-gnu/libvtkCommonCore-6.2.so /usr/lib/libvtkproj4.so
-
-# Install OpenGL Drivers
-RUN apt-get update && \
-    apt-get install -y --allow-unauthenticated libglu1-mesa-dev freeglut3-dev mesa-common-dev mesa-utils
 
 # GDAL
 RUN add-apt-repository --yes ppa:ubuntugis/ppa && \
@@ -87,7 +87,7 @@ RUN cd /opt && git clone https://github.com/LASzip/LASzip && \
     make install
 
 # EIGEN
-RUN cd /opt && wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2 && \
+RUN cd /opt && wget https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.bz2 && \
     tar xvjf eigen* && \
     cd eigen-* && \
     mkdir build && \
@@ -97,9 +97,9 @@ RUN cd /opt && wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.
     make install
     
 #PDAL
-RUN cd /opt && wget https://github.com/PDAL/PDAL/releases/download/2.0.1/PDAL-2.0.1-src.tar.gz && \
-    tar xvzf PDAL-2.0.1-src.tar.gz && \
-    cd PDAL-2.0.1-src && \
+RUN cd /opt && wget https://github.com/PDAL/PDAL/releases/download/2.2.0/PDAL-2.2.0-src.tar.gz && \
+    tar xvzf PDAL-2.2.0-src.tar.gz && \
+    cd PDAL-2.2.0-src && \
     mkdir build && \
     cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release \
@@ -111,18 +111,13 @@ RUN cd /opt && wget https://github.com/PDAL/PDAL/releases/download/2.0.1/PDAL-2.
     make && \
     make install
 
-# PCL -- need to test for bionic
-#RUN add-apt-repository --yes ppa:v-launchpad-jochen-sprickerhof-de/pcl && \
-#    apt-get update && \
-#    apt-get install -y libpcl-all libpcl-dev
-
 # CC compiling suggestion
 RUN /sbin/ldconfig -v
 
 # Install CloudCompare Trunk from Github
 ENV LD_LIBRARY_PATH /opt/qt511/lib/
 RUN cd /opt && git clone --recursive https://github.com/cloudcompare/CloudCompare.git  
-RUN cd /opt/CloudCompare && git checkout tags/v2.10.1 && git submodule init && \
+RUN cd /opt/CloudCompare && git checkout tags/v2.11.3 && git submodule init && \
     git submodule update && \
     mkdir build && \
     cd build && \
@@ -159,12 +154,12 @@ RUN cd /opt/CloudCompare && git checkout tags/v2.10.1 && git submodule init && \
     -DOPTION_USE_DXF_LIB=ON \
     -DOPTION_USE_SHAPE_LIB=ON \
     -DOPTION_USE_DXF_LIB=ON \
-    #-DINSTALL_QPCL_PLUGIN=ON \
+    -DINSTALL_QPCL_PLUGIN=ON \
     .. && \
     make && \
     make install
 
-RUN cd /tmp && wget https://sourceforge.net/projects/virtualgl/files/2.6.3/virtualgl_2.6.3_amd64.deb/download -O virtualgl_2.6.3_amd64.deb && dpkg -i --force-depends virtualgl_2.6.3_amd64.deb && apt-get -f install
+RUN cd /tmp && wget https://sourceforge.net/projects/virtualgl/files/2.6.5/virtualgl_2.6.5_amd64.deb/download -O virtualgl_2.6.5_amd64.deb && dpkg -i --force-depends virtualgl_2.6.5_amd64.deb && apt-get -f install
 
 RUN cd /opt && rm -rf *.tar.bz2 && \
     rm -rf *.tar.gz && rm -rf *.deb

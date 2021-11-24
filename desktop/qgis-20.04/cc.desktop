@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=0.1
+Type=Applicatoin
+Terminal=false
+Exec=/usr/local/bin/CloudCompare
+Name="CloudCompare"
+Comment=2.11.3
+Icon=/opt/CloudCompare/CC/doc/cloudcompare.png

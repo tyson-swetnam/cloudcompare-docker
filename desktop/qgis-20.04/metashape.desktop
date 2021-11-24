@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=0.1
+Type=Application
+Terminal=false
+Exec=/opt/metashape-pro/metashape.sh
+Name="Metashape"
+Comment=1.7.3

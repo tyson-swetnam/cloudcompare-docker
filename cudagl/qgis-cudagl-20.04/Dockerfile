@@ -1,4 +1,4 @@
-FROM harbor.cyverse.org/vice/xpra/cudagl:20.04
+FROM harbor.cyverse.org/vice/xpra/cudagl:qgis-20.04
 
 USER root
 
@@ -62,13 +62,8 @@ RUN cd /opt && git clone https://github.com/LASzip/LASzip && \
     make -j48 && \
     make -j48 install
 
-# Compile PCL
-RUN apt-get update && apt-get install libflann-dev -y
-RUN cd /opt && git clone https://github.com/PointCloudLibrary/pcl pcl-trunk && \
-    cd /opt/pcl-trunk && mkdir build && cd build && \
-    cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .. && \
-    make -j48 && \
-    make -j48 install
+# Install PCL
+RUN apt-get update && apt-get install libflann-dev libpcl-dev -y
 
 # CC suggestion
 RUN /sbin/ldconfig -v

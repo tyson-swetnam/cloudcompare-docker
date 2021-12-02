@@ -7,3 +7,4 @@ Exec=vglrun /opt/metashape-pro/metashape.sh
 Name="VirtualGL Metashape"
 Comment=1.7.3
 Icon=/usr/share/icons/xpra.png
+NoDisplay=false

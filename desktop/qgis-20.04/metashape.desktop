@@ -6,3 +6,4 @@ Terminal=false
 Exec=/opt/metashape-pro/metashape.sh
 Name="Metashape"
 Comment=1.7.3
+NoDisplay=false

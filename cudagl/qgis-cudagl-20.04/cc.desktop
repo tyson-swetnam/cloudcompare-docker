@@ -7,3 +7,4 @@ Exec=vglrun /usr/local/bin/CloudCompare
 Name="VirtualGL CloudCompare"
 Comment=2.11.3
 Icon=/opt/CloudCompare/CC/doc/cloudcompare.png
+NoDisplay=false

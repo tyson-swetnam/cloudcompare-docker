@@ -1,7 +1,7 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=0.1
-Type=Applicatoin
+Type=Application
 Terminal=false
 Exec=/usr/local/bin/CloudCompare
 Name="CloudCompare"

@@ -2,12 +2,15 @@
 
 Docker build for [CloudCompare](https://www.danielgm.net/cc/) based on [NVIDIA OpenGL Ubuntu](https://hub.docker.com/r/nvidia/opengl) containers.
 
-[CloudCompare Github](https://github.com/cloudcompare/cloudcompare)
+[CloudCompare GitHub](https://github.com/cloudcompare/cloudcompare)
 
-image            | description                               | size   | metrics | build status 
----------------- | ----------------------------------------- | ------ | ------- | --------------
-[![DockerHub](https://img.shields.io/badge/DockerHub-brightgreen.svg?style=popout&logo=Docker)](https://hub.docker.com/r/tswetnam/cloudcompare)  | CloudCompare w/ NVIDIA OpenGL Ubuntu 18.04 base | [![](https://images.microbadger.com/badges/image/tswetnam/cloudcompare.svg)](https://microbadger.com/images/tswetnam/cloudcompare) | [![](https://img.shields.io/docker/pulls/tswetnam/cloudcompare.svg)](https://hub.docker.com/r/tswetnam/cloudcompare)  |  [![](https://img.shields.io/docker/automated/tswetnam/cloudcompare.svg)](https://hub.docker.com/r/tswetnam/cloudcompare/builds)
+There are two types of containers here.
 
+First, there is an `OpenGL` image tag which uses the [`nvidia/opengl`](https://hub.docker.com/r/nvidia/opengl) docker image
+
+Second, there is a `CudaGL` image tag which uses the [`nvidia/cudagl`](https://hub.docker.com/r/nvidia/cudagl) docker image
+
+The main difference between the two containers is the addition of CUDA
 
 ## Instructions
 

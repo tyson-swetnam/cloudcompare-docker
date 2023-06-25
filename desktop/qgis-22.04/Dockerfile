@@ -1,4 +1,4 @@
-FROM harbor.cyverse.org/vice/xpra/desktop:qgis-20.04
+FROM harbor.cyverse.org/vice/xpra/qgis:22.04
 
 USER root
 
@@ -8,10 +8,8 @@ RUN export DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated && \
     apt-get update && apt-get install -y --allow-unauthenticated build-essential software-properties-common apt-utils && \
-    add-apt-repository --yes ppa:webupd8team/y-ppa-manager && \
     apt-get update && \
-    apt-get install -y y-ppa-manager && \
-    add-apt-repository --yes ppa:beineri/opt-qt-5.12.10-focal && \
+    add-apt-repository ppa:rncbc/qt6.6-static-jammy && \
     add-apt-repository --yes ppa:ubuntu-x-swat/updates && \
     apt-get update
 
@@ -35,8 +33,6 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     libxpm-dev \
     libzmq3-dev \
     pkg-config \
-    qt5-default \
-    qt512base \
     qttools5-dev \
     rsync \
     openjdk-8-jdk \
@@ -72,14 +68,14 @@ RUN /sbin/ldconfig -v
 ENV LD_LIBRARY_PATH /opt/qt512/lib/
 RUN apt-get update
 RUN cd /opt && git clone --recursive https://github.com/cloudcompare/CloudCompare.git CloudCompare && \
-    cd /opt/CloudCompare && git checkout tags/v2.11.3 && \
+    cd /opt/CloudCompare && git checkout tags/v2.12.4 && \
     cd /opt/CloudCompare/ && mkdir build && \
     cd build && \
     # set release and compiler type
     cmake -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_COMPILER=clang++ \
-    # set path for QT 5.12
-    -DQT5_ROOT_PATH=/opt/qt512/ \	    
+    # set path for QT5
+    -DQT5_ROOT_PATH=/usr/share/qt5 \	    
     -DEIGEN_ROOT_DIR=/usr/local/include/eigen3/ \
     -DCOMPILE_CC_CORE_LIB_WITH_TBB=ON \
    # set plugins
@@ -131,10 +127,10 @@ RUN cd /opt && git clone --recursive https://github.com/cloudcompare/CloudCompar
 ENV LD_LIBRARY_PATH /usr/local/bin   
 
 # Agisoft Metashape
-RUN cd /opt && wget https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-pro_1_7_3_amd64.tar.gz && \
-    tar xvf metashape-pro_1_7_3_amd64.tar.gz && \
-    cd /opt/metashape-pro && wget https://s3-eu-west-1.amazonaws.com/download.agisoft.com/Metashape-1.7.3-cp35.cp36.cp37.cp38-abi3-linux_x86_64.whl && \
-    wget https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-java-api-1.7.3.zip && unzip *.zip
+RUN cd /opt && wget https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-pro_2_0_2_amd64.tar.gz && \
+    tar xvf metashape-pro_2_0_2_amd64.tar.gz && \
+    cd /opt/metashape-pro && wget https://s3-eu-west-1.amazonaws.com/download.agisoft.com/Metashape-2.0.2-cp37.cp38.cp39.cp310.cp311-abi3-linux_x86_64.whl && \
+    wget https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-java-api-2.0.2.zip && unzip *.zip
 
 # Create Desktop Icons
 
